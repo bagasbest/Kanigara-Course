@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1056773187134",
+    "project_id": "kanigara-course",
+    "storage_bucket": "kanigara-course.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1056773187134:android:4ff6a4de7f9417f04ed36f",
+        "android_client_info": {
+          "package_name": "com.kanigara.kanigara_course"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1056773187134-vad4dgtg6sheqnf6ug27po2cj9kbbg6h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCU7Yd1aNHeAgUgf9CbtbGjMeAPJZ6gBUA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1056773187134-vad4dgtg6sheqnf6ug27po2cj9kbbg6h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
