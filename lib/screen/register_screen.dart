@@ -32,10 +32,9 @@ class _RegisterPageState extends State<RegisterPage> {
             decoration: BoxDecoration(
                 color: Constant.colorPrimary,
                 borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(25),
-                bottomRight: Radius.circular(25),
-              )
-            ),
+                  bottomLeft: Radius.circular(25),
+                  bottomRight: Radius.circular(25),
+                )),
           ),
           SizedBox(
             height: 16,
@@ -61,7 +60,7 @@ class _RegisterPageState extends State<RegisterPage> {
               children: [
                 /// KOLOM NAMA
                 Container(
-                  margin: EdgeInsets.only(top: 10,left: 16,right: 16),
+                  margin: EdgeInsets.only(top: 10, left: 16, right: 16),
                   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 1),
                   decoration: BoxDecoration(
                     color: Colors.grey[200],
@@ -86,7 +85,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
                 /// KOLOM EMAIL
                 Container(
-                  margin: EdgeInsets.only(top: 10,left: 16,right: 16),
+                  margin: EdgeInsets.only(top: 10, left: 16, right: 16),
                   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 1),
                   decoration: BoxDecoration(
                     color: Colors.grey[200],
@@ -113,7 +112,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
                 /// KOLOM PASSWORD
                 Container(
-                  margin: EdgeInsets.only(top: 10,left: 16,right: 16),
+                  margin: EdgeInsets.only(top: 10, left: 16, right: 16),
                   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 1),
                   decoration: BoxDecoration(
                     color: Colors.grey[200],
@@ -161,7 +160,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
                 /// TOMBOL REGISTRASI
                 Container(
-                  width: 200,
+                  width: 250,
                   height: 40,
                   child: RaisedButton(
                       color: Constant.colorSecondary,
@@ -191,9 +190,10 @@ class _RegisterPageState extends State<RegisterPage> {
                             });
 
                             _formKey.currentState!.reset();
-                            Route route = MaterialPageRoute(
-                                builder: (context) => HomeScreen());
-                            Navigator.pushReplacement(context, route);
+                            Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                    builder: (context) => HomeScreen()),
+                                (Route<dynamic> route) => false);
                           }
                         }
                       }),
@@ -202,7 +202,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   onPressed: () {
                     Route route =
                         MaterialPageRoute(builder: (context) => LoginPage());
-                    Navigator.push(context, route);
+                    Navigator.pushReplacement(context, route);
                   },
                   splashColor: Colors.grey[200],
                   child: Text(
@@ -222,38 +222,27 @@ class _RegisterPageState extends State<RegisterPage> {
 
   _registerHandler() async {
     try {
-      await FirebaseAuth
-          .instance
-          .createUserWithEmailAndPassword(email: _emailController.text, password: _passwordController.text);
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailController.text, password: _passwordController.text);
       return true;
     } catch (error) {
-      switch (error) {
-        case "ERROR_EMAIL_ALREADY_IN_USE":
-        case "account-exists-with-different-credential":
-        case "email-already-in-use":
-          toast('Email yang anda daftarkan telah terpakai');
-          break;
-        default:
-          toast(
-              'Terjadi error yang tidak diketahui, silahkan cek koneksi internet anda');
-      }
+      toast(
+          'Gagal melakukan pendaftaran, silahkan periksa kembali data diri anda dan koneksi internet anda');
       return false;
     }
   }
 
-  _registeringUserToDatabase() {
+  _registeringUserToDatabase() async {
     try {
       String uid = FirebaseAuth.instance.currentUser!.uid;
-      FirebaseFirestore
-      .instance
-      .collection('users')
-      .doc(uid)
-      .set({
+      print(uid);
+      await FirebaseFirestore.instance.collection('users').doc(uid).set({
         "uid": uid,
         "name": _nameController.text,
         "email": _emailController.text,
+        "role": 'user',
       });
-    } catch(error) {
+    } catch (error) {
       toast("Gagal melakukan pendaftaran, silahkan cek koneksi internet anda");
     }
   }

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -19,9 +17,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: LoginPageScreen(),
-    );
+    return LoginPageScreen();
   }
 }
 
@@ -51,8 +47,7 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
                   borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(25),
                     bottomRight: Radius.circular(25),
-                  )
-              ),
+                  )),
             ),
             SizedBox(
               height: 16,
@@ -78,7 +73,7 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
                 children: [
                   /// KOLOM EMAIL
                   Container(
-                    margin: EdgeInsets.only(top: 10,left: 16,right: 16),
+                    margin: EdgeInsets.only(top: 10, left: 16, right: 16),
                     padding: EdgeInsets.symmetric(horizontal: 30, vertical: 1),
                     decoration: BoxDecoration(
                       color: Colors.grey[200],
@@ -94,7 +89,8 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Email tidak boleh kosong';
-                        } else if (!value.contains('@') || !value.contains('.')) {
+                        } else if (!value.contains('@') ||
+                            !value.contains('.')) {
                           return 'Format Email tidak sesuai';
                         } else {
                           return null;
@@ -105,7 +101,7 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
 
                   /// KOLOM PASSWORD
                   Container(
-                    margin: EdgeInsets.only(top: 10,left: 16,right: 16),
+                    margin: EdgeInsets.only(top: 10, left: 16, right: 16),
                     padding: EdgeInsets.symmetric(horizontal: 30, vertical: 1),
                     decoration: BoxDecoration(
                       color: Colors.grey[200],
@@ -150,10 +146,11 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
                   SizedBox(
                     height: 16,
                   ),
+
                   /// TOMBOL LOGIN
                   Container(
                     width: 200,
-                    height: 40,
+                    height: 50,
                     child: RaisedButton(
                         color: Constant.colorSecondary,
                         child: Text(
@@ -195,8 +192,8 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
                   ),
                   FlatButton(
                     onPressed: () {
-                      Route route =
-                          MaterialPageRoute(builder: (context) => RegisterPage());
+                      Route route = MaterialPageRoute(
+                          builder: (context) => RegisterPage());
                       Navigator.push(context, route);
                     },
                     splashColor: Colors.grey[200],
@@ -224,24 +221,7 @@ class _LoginPageScreenState extends State<LoginPageScreen> {
 
       return true;
     } catch (error) {
-      String errorType = '';
-      if (Platform.isAndroid) {
-        switch (error) {
-          case 'There is no user record corresponding to this identifier. The user may have been deleted.':
-            errorType = 'Akun tidak terdaftar';
-            break;
-          case 'The password is invalid or the user does not have a password.':
-            errorType = 'password salah';
-            break;
-          case 'A network error (such as timeout, interrupted connection or unreachable host) has occurred.':
-            errorType = 'Sedang terdapat gangguan pada jaringan';
-            break;
-
-          default:
-            print('Case $error is not yet implemented');
-        }
-      }
-      toast(errorType);
+      toast('Terdapat kendala ketika ingin login. Silahkan periksa kembali email & password, serta koneksi internet anda');
       return false;
     }
   }

@@ -30,18 +30,27 @@ dependencies:
   cupertino_icons: ^1.0.2
 
   #Firebase Authentication
-  firebase_core:
-  firebase_auth:
-  cloud_firestore:
+  firebase_core: ^1.4.0
+  firebase_auth: ^3.0.1
+  cloud_firestore: ^2.4.0
 
   #Firebase Storage
-  firebase_storage:
+  firebase_storage: ^10.0.1
 
   #Untuk menampilkan loading interaktif
   flutter_spinkit:
 
   #Untuk menampilkan toast atau pesan langsung
   fluttertoast:
+
+  #Dotted Border
+  dotted_border:
+
+  #Image Picker
+  image_picker:
+
+  #Untuk menampilkan waktu sekarang
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
@@ -52,7 +61,7 @@ dev_dependencies:
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/splashscreen.png"
+  image_path: "assets/icon.png"
 
 
 flutter_launcher_name:

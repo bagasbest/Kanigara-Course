@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:kanigara_course/screen/home_screen.dart';
 import 'package:kanigara_course/screen/login_screen.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -12,14 +11,17 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     User? user = FirebaseAuth.instance.currentUser;
-    if(user != null) {
-      return HomeScreen();
+    if (user != null) {
+      return MaterialApp(
+        home: HomeScreen(),
+      );
     } else {
-      return LoginPage();
+      return MaterialApp(
+        home: LoginPage(),
+      );
     }
   }
 }
